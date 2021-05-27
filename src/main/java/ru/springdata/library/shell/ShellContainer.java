@@ -3,8 +3,8 @@ package ru.springdata.library.shell;
 import lombok.AllArgsConstructor;
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
+import org.springframework.shell.standard.ShellOption;
 import ru.springdata.library.controller.LibraryController;
-import ru.springdata.library.service.BookService;
 
 @ShellComponent
 @AllArgsConstructor
@@ -17,11 +17,15 @@ public class ShellContainer {
         libraryController.printAllBooks();
     }
 
-
-    @ShellMethod(key = "cmt", value = "cmt")
-    public void test() {
-        libraryController.printComment(4l);
+    @ShellMethod(key = "cmt", value = "Show book comments by id")
+    public void showComments(Long id) {
+        libraryController.printComment(id);
     }
 
+
+    @ShellMethod(key = "del", value = "Delete Book by name")
+    public void deleteBook(@ShellOption({"bookName"}) String name) {
+        libraryController.deleteBook(name);
+    }
 
 }

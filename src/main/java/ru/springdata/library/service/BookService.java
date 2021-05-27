@@ -1,5 +1,6 @@
 package ru.springdata.library.service;
 
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.springdata.library.domain.Book;
@@ -12,20 +13,17 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
+@AllArgsConstructor
 public class BookService {
     private final BookRepo bookRepo;
 
-    public BookService(BookRepo bookRepo) {
-        this.bookRepo = bookRepo;
-    }
 
-
-    @Transactional
+    @Transactional(readOnly = true)
     public Book findBookById(Long bookId){
         return bookRepo.findById(bookId).orElse(new Book());
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     public List<String> findComments(Long bookId) {
         Optional<Book> bookRepoById = bookRepo.findById(bookId);
         List<Comment> comments = bookRepoById.map(Book::getComments).orElse(Collections.emptyList());
@@ -33,8 +31,19 @@ public class BookService {
         else                    return comments.stream().map(comment -> comment.getBookComment()).collect(Collectors.toList());
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     public List<Book> getAllBooks() {
         return bookRepo.findAll();
     }
+
+    @Transactional
+    public boolean deleteBook(String bookName) {
+        if(bookRepo.findByName(bookName).isPresent()) {
+            bookRepo.deleteBookByName(bookName);
+            return true;
+        }
+        else return false;
+    }
+
+
 }

@@ -11,7 +11,7 @@ import java.io.Serializable;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class Comment{
+public class Comment  implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

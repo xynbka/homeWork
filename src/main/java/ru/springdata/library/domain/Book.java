@@ -1,8 +1,6 @@
 package ru.springdata.library.domain;
 
 import lombok.*;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -15,7 +13,7 @@ import java.util.List;
 @Table(name = "books")
 @EqualsAndHashCode(exclude = "author")
 @ToString(exclude = "author")
-public class Book {
+public class Book  implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,7 +22,7 @@ public class Book {
     @Column(name = "book_name")
     private String name;
 
-    @ManyToMany(targetEntity = Author.class ,cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToMany(targetEntity = Author.class, fetch = FetchType.EAGER)
     @JoinTable( name = "book_author",
                 joinColumns = {@JoinColumn(name = "book_id")},
                 inverseJoinColumns = {@JoinColumn(name = "author_id")})
@@ -34,7 +32,7 @@ public class Book {
     @JoinColumn(name = "genre_id")
     private Genre genres;
 
-    @OneToMany(targetEntity = Comment.class, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(targetEntity = Comment.class, cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
     @JoinColumn(name = "book_id")
     private List<Comment> comments;
 }
