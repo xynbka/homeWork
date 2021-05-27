@@ -24,13 +24,13 @@ public class Book {
     @Column(name = "book_name")
     private String name;
 
-    @ManyToMany(targetEntity = Author.class ,cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToMany(targetEntity = Author.class ,cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable( name = "book_author",
                 joinColumns = {@JoinColumn(name = "book_id")},
                 inverseJoinColumns = {@JoinColumn(name = "author_id")})
     private List<Author> author;
 
-    @ManyToOne(targetEntity = Genre.class, fetch = FetchType.EAGER)
+    @ManyToOne(targetEntity = Genre.class, fetch = FetchType.LAZY)
     @JoinColumn(name = "genre_id")
     private Genre genres;
 
