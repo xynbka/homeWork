@@ -16,18 +16,11 @@ import java.util.Optional;
 
 
 @Repository
-public interface BookRepo extends JpaRepository<Book, Long> {
+public interface BookRepo extends CustomBookRepo, JpaRepository<Book, Long> {
 
-//    @EntityGraph(   type = EntityGraph.EntityGraphType.FETCH,
-//            attributePaths = {
-//                    "genres",
-//                    "comments"
-//            }
-//    )
     @EntityGraph(value = "bookGraphAll", type = EntityGraph.EntityGraphType.FETCH)
     Optional<Book> findById(Long id);
 
-    @EntityGraph(value = "bookGraphAll", type = EntityGraph.EntityGraphType.FETCH)
     List<Book> findAll();
 
     @Query("SELECT B FROM Book B WHERE LOWER(B.name) LIKE LOWER(:name)")

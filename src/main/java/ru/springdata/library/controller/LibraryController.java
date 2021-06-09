@@ -24,6 +24,7 @@ public class LibraryController {
 
         for (Book book : books) {
             System.out.println(book.getAuthor());
+            System.out.println(book.getComments().toString());
         }
     }
 

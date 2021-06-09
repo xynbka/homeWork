@@ -9,7 +9,9 @@ import org.springframework.data.jpa.repository.EntityGraph;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @NoArgsConstructor
@@ -21,9 +23,9 @@ import java.util.List;
 @NamedEntityGraph(   name = "bookGraphAll",
         attributeNodes = {
                 @NamedAttributeNode("comments"),
-                @NamedAttributeNode("genres")
-        }
-)
+                @NamedAttributeNode("genres"),
+        } )
+
 public class Book  implements Serializable {
 
     @Id
@@ -39,7 +41,6 @@ public class Book  implements Serializable {
 
     @Getter
     @Setter
-    @BatchSize(size = 5)
     @ManyToMany(targetEntity = Author.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable( name = "book_author",
                 joinColumns = {@JoinColumn(name = "book_id")},
@@ -56,5 +57,5 @@ public class Book  implements Serializable {
     @JoinColumn(name = "book_id")
     @Getter
     @Setter
-    private List<Comment> comments;
+    private List<Comment> comments = new ArrayList<>();
 }
