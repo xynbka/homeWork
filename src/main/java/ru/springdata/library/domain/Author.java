@@ -8,8 +8,6 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
 
-@Data
-@AllArgsConstructor
 @NoArgsConstructor
 @Entity
 @EqualsAndHashCode(exclude = "authorBooks")
@@ -18,14 +16,20 @@ public class Author implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Getter
+    @Setter
     private long id;
 
+    @Getter
+    @Setter
     @Column(name = "author_name")
     private String name;
 
-    @ManyToMany
-    @JoinTable( name = "book_author",
-            joinColumns = {@JoinColumn(name = "author_id")},
-            inverseJoinColumns = {@JoinColumn(name = "book_id")})
-    private List<Book> authorBooks;
+//    @Getter
+//    @Setter
+//    @ManyToMany
+//    @JoinTable( name = "book_author",
+//            joinColumns = {@JoinColumn(name = "author_id")},
+//            inverseJoinColumns = {@JoinColumn(name = "book_id")})
+//    private List<Book> authorBooks;
 }

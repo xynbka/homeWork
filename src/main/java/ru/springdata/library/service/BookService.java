@@ -2,6 +2,8 @@ package ru.springdata.library.service;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import ru.springdata.library.domain.Book;
 import ru.springdata.library.domain.Comment;
@@ -16,7 +18,6 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 public class BookService {
     private final BookRepo bookRepo;
-
 
     @Transactional(readOnly = true)
     public Book findBookById(Long bookId){
@@ -33,7 +34,8 @@ public class BookService {
 
     @Transactional(readOnly = true)
     public List<Book> getAllBooks() {
-        return bookRepo.findAll();
+        List<Book> all = bookRepo.findAll();
+        return all;
     }
 
     @Transactional

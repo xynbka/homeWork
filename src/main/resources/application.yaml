@@ -3,6 +3,7 @@ spring:
     url: jdbc:h2:mem:testdb;
     schema: schema.sql
     username: sa
+    password: 1
   jpa:
     open-in-view: false
     hibernate:

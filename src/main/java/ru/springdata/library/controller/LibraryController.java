@@ -20,7 +20,11 @@ public class LibraryController {
     }
 
     public void printAllBooks(){
-        bookService.getAllBooks().stream().forEach(book -> System.out.println(book.toString()));
+        List<Book> books = bookService.getAllBooks();
+
+        for (Book book : books) {
+            System.out.println(book.getAuthor());
+        }
     }
 
     public void deleteBook(String name){
