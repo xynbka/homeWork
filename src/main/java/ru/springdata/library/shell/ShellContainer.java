@@ -22,10 +22,14 @@ public class ShellContainer {
         libraryController.printComment(id);
     }
 
-
     @ShellMethod(key = "del", value = "Delete Book by name")
     public void deleteBook(@ShellOption({"bookName"}) String name) {
         libraryController.deleteBook(name);
     }
 
+    @ShellMethod(key = "add", value = "Add new book")
+    public void addBook(@ShellOption({"bookName"}) String name, @ShellOption({"author"}) String author, @ShellOption("genre") String genre) {
+        System.out.println("name: " + name + " genre: " + genre + " author: " + author);
+        libraryController.addNewBook(name, author, genre);
+    }
 }

@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.util.List;
 
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @EqualsAndHashCode(exclude = "authorBooks")
 @ToString(exclude = "authorBooks")

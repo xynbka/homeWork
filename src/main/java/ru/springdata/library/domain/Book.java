@@ -20,10 +20,11 @@ import java.util.Set;
 @EqualsAndHashCode(exclude = "author")
 @ToString(exclude = "author")
 
-@NamedEntityGraph(   name = "bookGraphAll",
-        attributeNodes = {
+@NamedEntityGraph
+        (   name = "bookGraphAll",
+            attributeNodes = {
                 @NamedAttributeNode("comments"),
-                @NamedAttributeNode("genres"),
+                @NamedAttributeNode("genre")
         } )
 
 public class Book  implements Serializable {
@@ -41,7 +42,7 @@ public class Book  implements Serializable {
 
     @Getter
     @Setter
-    @ManyToMany(targetEntity = Author.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToMany(targetEntity = Author.class, fetch = FetchType.LAZY)
     @JoinTable( name = "book_author",
                 joinColumns = {@JoinColumn(name = "book_id")},
                 inverseJoinColumns = {@JoinColumn(name = "author_id")})
@@ -51,11 +52,11 @@ public class Book  implements Serializable {
     @JoinColumn(name = "genre_id")
     @Getter
     @Setter
-    private Genre genres;
+    private Genre genre;
 
-    @OneToMany(targetEntity = Comment.class, cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
-    @JoinColumn(name = "book_id")
     @Getter
     @Setter
+    @OneToMany(targetEntity = Comment.class, cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+    @JoinColumn(name = "book_id")
     private List<Comment> comments = new ArrayList<>();
 }

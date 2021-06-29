@@ -26,7 +26,8 @@ public interface BookRepo extends CustomBookRepo, JpaRepository<Book, Long> {
     @Query("SELECT B FROM Book B WHERE LOWER(B.name) LIKE LOWER(:name)")
     Optional<Book> findByName(@Param("name") String name);
 
-    @Modifying
-    @Query("DELETE FROM Book B WHERE LOWER(B.name) LIKE LOWER(:name)")
-    void deleteBookByName(@Param("name") String name);
+//    @Modifying
+//    @Query("DELETE FROM Book B WHERE LOWER(B.name) LIKE LOWER(:name)")
+//    void deleteBookByName(@Param("name") String name);
+
 }

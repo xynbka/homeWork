@@ -38,14 +38,26 @@ public class BookService {
         return all;
     }
 
+    @Transactional(readOnly = true)
+    public boolean bookExist(String name) {
+        return bookRepo.findByName(name).isPresent();
+    }
+
     @Transactional
     public boolean deleteBook(String bookName) {
         if(bookRepo.findByName(bookName).isPresent()) {
-            bookRepo.deleteBookByName(bookName);
+            Optional<Book> book = bookRepo.findByName(bookName);
+            bookRepo.delete(book.get());
             return true;
         }
         else return false;
     }
+
+    @Transactional
+    public Book addBook(Book book) {
+        return bookRepo.save(book);
+    }
+
 
 
 }
