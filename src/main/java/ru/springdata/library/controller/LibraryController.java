@@ -3,6 +3,7 @@ package ru.springdata.library.controller;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RestController;
 import ru.springdata.library.domain.Author;
 import ru.springdata.library.domain.Book;
 import ru.springdata.library.domain.Genre;
@@ -13,7 +14,7 @@ import ru.springdata.library.service.BookService;
 import java.util.*;
 import java.util.stream.Collectors;
 
-@Controller
+@RestController
 @AllArgsConstructor
 public class LibraryController {
 

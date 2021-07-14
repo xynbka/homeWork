@@ -38,7 +38,8 @@ public class BookService {
         return all;
     }
 
-    @Transactional(readOnly = true)
+    @Transactional(readOnly = true, isolation = Isolation.REPEATABLE_READ
+    )
     public boolean bookExist(String name) {
         return bookRepo.findByName(name).isPresent();
     }

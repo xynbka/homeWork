@@ -1,13 +1,13 @@
-insert into GENRE (GENRE_NAME) values ('порно');
+insert into GENRE (GENRE_NAME) values ('приключениия');
 insert into GENRE (GENRE_NAME) values ('боевик');
 insert into GENRE (GENRE_NAME) values ('фантастика');
 
 insert into AUTHOR (AUTHOR_NAME) values ('Роджер Желязны');
-insert into AUTHOR (AUTHOR_NAME) values ('Пизда');
+insert into AUTHOR (AUTHOR_NAME) values ('Толкиен');
 insert into AUTHOR (AUTHOR_NAME) values ('Сергей Тормашев');
 
 insert into BOOKS (BOOK_NAME,GENRE_ID,AUTHOR_ID) values ('Хроники Амбера',3,1);
-insert into BOOKS (BOOK_NAME,GENRE_ID,AUTHOR_ID) values ('Как я трахнул вашу маму',1,2);
+insert into BOOKS (BOOK_NAME,GENRE_ID,AUTHOR_ID) values ('Братство кольца',1,2);
 insert into BOOKS (BOOK_NAME,GENRE_ID,AUTHOR_ID) values ('Древний',2,3);
 insert into BOOKS (BOOK_NAME,GENRE_ID,AUTHOR_ID) values ('Имя мне Легион',3,1);
 
